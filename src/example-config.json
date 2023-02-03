@@ -1,0 +1,12 @@
+{
+	"DISCORD_TOKEN": "",
+	"roles": {
+		"admin": "",
+		"mod": ""
+	},
+	"quietTime": {
+		"times": []
+	},
+	"guildId": "",
+	"clientId": ""
+}

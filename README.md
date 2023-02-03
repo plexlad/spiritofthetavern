@@ -20,8 +20,9 @@ Programming Features:
  	* `mod`: Values for the moderator role.
 	* `admin`: Values for the admin role.
  * `quietTime`: Configuration options for the quiet time feature.
- 	* `channelExceptions`: The IDs of the guild channels exempted from quiet time.
 	* `times`: Sets of arrays with the assigned quite time values. In format [[starTime, endTime], ...]. Time segments can be unlimited.
+ * `guildId`: The ID of the actively maintained guild (server)
+ * `clientId`: The client ID of your bot
 
 ## Getting Started (for developers)
 There are some features that make development very nice and extremely convenient.
