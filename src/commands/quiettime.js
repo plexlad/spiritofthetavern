@@ -9,6 +9,6 @@ module.exports = {
 
 	async execute(interaction) {
 		quiettime(interaction.client);
-		interaction.reply({ content: "Quiettime", ephemeral: true });
+		interaction.reply({ content: "Quiet time has been toggled!", ephemeral: true });
 	}
 }

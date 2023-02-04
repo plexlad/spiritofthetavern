@@ -1,3 +1,4 @@
+// TODO: COMMENT EVERYTHING!!!!
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
@@ -5,6 +6,7 @@ const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.config = require('./config.json');
 const { DISCORD_TOKEN } = client.config;
+const { errMsg } = require('./dev.js');
 
 client.vars = {};
 client.functions
@@ -32,8 +34,24 @@ for (const file of preconsFiles) {
 	client.preconditions.set(file.slice(0, -3), precon);
 }
 
+client.scripts = new Collection();
+const scriptsPath = path.join(__dirname, 'scripts');
+const scriptsFiles = fs.readdirSync(scriptsPath).filter(file => file.endsWith('.js'));
+const scriptsArray = [];
+
+for (const file of scriptsFiles) {
+	const filePath = path.join(scriptsPath, file);
+	const script = require(filePath);
+	client.scripts.set(file.slice(0, -3), script);
+}
+
 client.once(Events.ClientReady, () => {
 	console.log(`[BOT] Spirit is logged in as ${client.user.username}!`);
+	client.scripts.each( s => {
+		if (s.ready) {
+			s.ready(client);
+		}
+	});
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -60,8 +78,8 @@ client.on(Events.InteractionCreate, async interaction => {
 		try {
 			await command.execute(interaction);
 		} catch (error) {
-			console.error(error);
-			await interaction.reply({ content: `There was an error while executing this command!`, ephemeral: true});
+			errMsg(client, error);
+			await interaction.reply({ content: `There was an error. I'll let the devs know!'`, ephemeral: true });
 		}
 	} else {
 		interaction.reply({ content: 'Sorry, you do not have the permissions to use this command!', ephemeral: true});
