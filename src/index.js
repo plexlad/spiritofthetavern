@@ -1,4 +1,3 @@
-// TODO: COMMENT EVERYTHING!!!!
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
@@ -56,9 +55,7 @@ client.once(Events.ClientReady, () => {
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;  // check if it is a chat command
-
 	const command = interaction.client.commands.get(interaction.commandName);  // grabs command
-
 	if (!command) return;  // checks if command exists
 
 	// checks through the preconditions
@@ -88,3 +85,8 @@ client.on(Events.InteractionCreate, async interaction => {
 
 client.login(DISCORD_TOKEN);
 
+module.exports = {
+	client
+}
+
+client.login(DISCORD_TOKEN);

@@ -6,7 +6,6 @@ module.exports = {
 		if (interaction.member.roles.cache.has(roles.mod) || interaction.member.roles.cache.has(roles.admin)) {
 			return true;
 		}
-
 		return false;
 	}
 }

@@ -2,35 +2,27 @@ const { guildId, quietTime: quietTimeConfig } = require("../config.json");
 const { PermissionsBitField } = require('discord.js');
 const { errMsg, modMsg } = require('../dev.js');
 
+// strings that hold the names of the on and off permissions for quiet time
+const onPermissions  = ['ReadMessageHistory', 'AddReactions', 'ViewChannel', 'ChangeNickname'];
+const offPermissions = ['ReadMessageHistory', 'AddReactions', 'ViewChannel', 'SendMessages', 'EmbedLinks', 'AttachFiles', 'Connect', 'Speak', 'ChangeNickname', 'UseApplicationCommands', 'RequestToSpeak', 'CreatePublicThreads', 'Stream'];
+
 function quietTime(client, on) {
+	let tempPerms = [];
 	if (on) {
-		client.guilds.cache.get(guildId).roles.everyone.setPermissions(
-			[
-				PermissionsBitField.Flags.ReadMessageHistory,
-				PermissionsBitField.Flags.AddReactions,
-				PermissionsBitField.Flags.ViewChannel,
-				PermissionsBitField.Flags.ChangeNickname,
-			]
-		).then()
+		for (let i of onPermissions) {
+			tempPerms.push(PermissionsBitField[i]);
+		}
+
+		client.guilds.cache.get(guildId).roles.everyone.setPermissions(tempPerms)
+		.then()
 		.catch(errMsg);
 	} else {
-		client.guilds.cache.get(guildId).roles.everyone.setPermissions(
-			[
-				PermissionsBitField.Flags.ReadMessageHistory,
-				PermissionsBitField.Flags.AddReactions,
-				PermissionsBitField.Flags.ViewChannel,
-				PermissionsBitField.Flags.SendMessages,
-				PermissionsBitField.Flags.EmbedLinks,
-				PermissionsBitField.Flags.AttachFiles,
-				PermissionsBitField.Flags.Connect,
-				PermissionsBitField.Flags.Speak,
-				PermissionsBitField.Flags.ChangeNickname,
-				PermissionsBitField.Flags.UseApplicationCommands,
-				PermissionsBitField.Flags.RequestToSpeak,
-				PermissionsBitField.Flags.CreatePublicThreads,
-				PermissionsBitField.Flags.Stream
-			]
-		).then()
+		for (let i of onPermissions) {
+			tempPerms.push(PermissionsBitField[i]);
+		}
+
+		client.guilds.cache.get(guildId).roles.everyone.setPermissions(tempPerms)
+		.then()
 		.catch(errMsg);
 	}
 	
