@@ -73,7 +73,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	// command goes through if valid, otherwise sends permission reply
 	if (validPrecons) {
 		try {
-			await command.execute(interaction);
+			await command.execute(interaction, client);
 		} catch (error) {
 			errMsg(client, error);
 			await interaction.reply({ content: `There was an error. I'll let the devs know!'`, ephemeral: true });

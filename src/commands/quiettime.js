@@ -7,7 +7,7 @@ module.exports = {
 		.setName('quiettime')
 		.setDescription('Moderator quiettime function')	,
 
-	async execute(interaction) {
+	async execute(interaction, client) {
 		quiettime(interaction.client);
 		interaction.reply({ content: "Quiet time has been toggled!", ephemeral: true });
 	}

@@ -40,5 +40,25 @@ module.exports = {
 		});
 
 		console.log(`[BOT] [MOD LOG] ${description}: ${content}`);
+	},
+	customModMsg: function(client, title, description, content) {
+		client.channels.cache.get(channels.mod).send({
+			embeds: [
+				{
+					type: "rich",
+					title: title,
+					description: "",
+					color: 0x61afef,
+					fields: [
+						{
+							name: description,
+							value: content
+						}
+					]
+				}
+			]
+		});
+
+		console.log(`[BOT] [MOD LOG] ${description}: ${content}`);
 	}
 }

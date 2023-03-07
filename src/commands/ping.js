@@ -5,7 +5,7 @@ module.exports = {
 		.setName('ping')
 		.setDescription('Replies with Pong!'),
 
-	async execute(interaction) {
+	async execute(interaction, client) {
 		const current = Date.now()
 		await interaction.reply({ content: 'Pong!', ephemeral: true });
 		const delay = Date.now() - current;
