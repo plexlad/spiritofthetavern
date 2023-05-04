@@ -20,12 +20,12 @@ Programming Features:
  	* `mod`: Values for the moderator role.
 	* `admin`: Values for the admin role.
  * `quietTime`: Configuration options for the quiet time feature.
-	* `times`: Sets of arrays with the assigned quite time values. In format [[starTime, endTime], ...]. Time segments can be unlimited.
+	* `times`: Sets of arrays with the assigned quite time values. In format [[startTime, endTime], ...]. Time segments can be unlimited.
  * `guildId`: The ID of the actively maintained guild (server)
  * `clientId`: The client ID of your bot
 
 ## Getting Started (for developers)
-There are some features that make development very nice and extremely convenient.
+There are some features that make development very nice and extremely convenient. The majority of features require adding javascript files to predetermined folders. This keeps things organized and modular.
 
 ### Commands
 To add a new slash command, create a new javascript file in the commands folder. The name does not matter, but is defined with the `data` value.
@@ -40,3 +40,18 @@ Preconditions are used to add special filters to commands by using a function to
 
 The precondition requires a value in `module.exports`:
  * `check(interaction, client)`: This is a function that runs when a precondition when called. Return `true` if you want the the command to go through, false if you want an error message.
+
+### Scripts
+Scripts are used to create event handlers in an easy manner. Event handlers are used to trigger a function after certain events have occured. These events are defined in detail in the [Discord.js v14 Events documentation](https://discord.js.org/#/docs/discord.js/main/typedef/Events) and also listed below. In order to get started, create a javascript file in the scripts folder. The name of the file does not matter. In `module.exports`, create an object named after one of the events in the documentation or listed below. You can put as many of these events into one file as needed.
+
+Each of the objects in `module.exports` uses these values:
+ * `execute(client)`: The function that will run when the event is called.
+ * `once`: A boolean that if the handler should only be run once.
+
+Compatible events: `ApplicationCommandPermissionsUpdate`, `AutoModerationActionExecution`, `AutoModerationActionExecution`, `AutoModerationRuleCreate`, `AutoModerationRuleDelete`, `AutoModerationRuleUpdate`, `CacheSweep`, `ChannelCreate`, `ChannelDelete`, `ChannelPinsUpdate`, `ChannelUpdate`, `ClientReady`, `Debug`, `Error`, `GuildAuditLogEntryCreate`, `GuildBanAdd`, `GuildBanRemove`, `GuildCreate`, `GuildDelete`, `GuildEmojiCreate`, `GuildEmojiDelete`, `GuildEmojiUpdate`, `GuildIntegrationsUpdate`, `GuildMemberAdd`, `GuildMemberAvailable`, `GuildMemberRemove`, `GuildMembersChunk`, `GuildMemberUpdate`, `GuildRoleCreate`, `GuildRoleDelete`, `GuildRoleUpdate`, `GuildScheduledEventUpdate`, `GuildScheduledEventCreate`, `GuildScheduledEventDelete`, `GuildScheduledEventUserAdd`, `GuildScheduledEventUserRemove`, `GuildStickerCreate`, `GuildStickerDelete`, `GuildStickerUpdate`, `GuildUnavailable`, `GuildUpdate`, `InteractionCreate`, `Invalidated`, `InviteCreate`, `InviteDelete`, `MessageBulkDelete`, `MessageCreate`, `MessageDelete`, `MessageReactionAdd`, `MessageReactionRemove`, `MessageReactionRemoveAll`, `MessageReactionRemoveEmoji`, `MessageUpdate`, `PresenceUpdate`, `ShardDisconnect`, `ShardError`, `ShardReady`, `ShardReconnecting`, `ShardResume`, `StageInstanceCreate`, `StageInstanceDelete`, `StageInstanceDelete`, `StageInstanceUpdate`, `ThreadCreate`, `ThreadDelte`, `ThreadListSync`, `ThreadMembersUpdate`, `ThreadMemberUpdate`, `ThreadUpdate`, `TypingStart`, `UserUpdate`, `VoiceServerUpdate`, `VoiceStateUpdate`, `Warn`, `WebhooksUpdate`
+
+## Conclusion
+If you have any questions, message a developer or member of the presidency on Discord. If there is a feature, issue, or request, please feel free to implement it or message a developer on the Discord.
+
+## Contributions
+In progress :)

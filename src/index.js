@@ -44,13 +44,21 @@ for (const file of scriptsFiles) {
 	client.scripts.set(file.slice(0, -3), script);
 }
 
-client.once(Events.ClientReady, () => {
-	console.log(`[BOT] Spirit is logged in as ${client.user.username}!`);
-	client.scripts.each( s => {
-		if (s.ready) {
-			s.ready(client);
+client.scripts.forEach((v, k, m) => {
+	// detect if any of the events are in the Events list and add the execute function to the event
+	for (const key in Events) {
+		if (v[key]) {
+			if (v[key].once) {
+				client.once(Events[key], v[key].execute);
+			} else {
+				client.on(Events[key], v[key].execute);
+			}
 		}
-	});
+	}
+});
+
+client.once(Events.ClientReady, () => {
+	console.log("[BOT] Client is ready.");
 });
 
 client.on(Events.InteractionCreate, async interaction => {
